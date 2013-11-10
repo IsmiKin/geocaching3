@@ -44,6 +44,19 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Tesoro.findByLocalidad", query = "SELECT t FROM Tesoro t WHERE t.localidad = :localidad"),
     @NamedQuery(name = "Tesoro.findByBorradoLogico", query = "SELECT t FROM Tesoro t WHERE t.borradoLogico = :borradoLogico")})
 public class Tesoro implements Serializable {
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "CodigoValidacion")
+    private String codigoValidacion;
+    @Size(max = 45)
+    @Column(name = "CodigoPostal")
+    private String codigoPostal;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "Provincia")
+    private String provincia;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -270,6 +283,30 @@ public class Tesoro implements Serializable {
     @Override
     public String toString() {
         return "entity.Tesoro[ idTesoro=" + idTesoro + " ]";
+    }
+
+    public String getCodigoValidacion() {
+        return codigoValidacion;
+    }
+
+    public void setCodigoValidacion(String codigoValidacion) {
+        this.codigoValidacion = codigoValidacion;
+    }
+
+    public String getCodigoPostal() {
+        return codigoPostal;
+    }
+
+    public void setCodigoPostal(String codigoPostal) {
+        this.codigoPostal = codigoPostal;
+    }
+
+    public String getProvincia() {
+        return provincia;
+    }
+
+    public void setProvincia(String provincia) {
+        this.provincia = provincia;
     }
     
 }
