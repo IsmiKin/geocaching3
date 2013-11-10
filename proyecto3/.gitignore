@@ -1,0 +1,16 @@
+build.xml
+proyecto3-ejb/build/
+proyecto3-ejb/dist/
+proyecto3-war/build/
+proyecto3-war/dist/
+build/
+nbproject/
+nbproject/private/
+build/
+dist/
+setup/
+
+
+*.jar
+*.war
+*.ear

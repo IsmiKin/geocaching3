@@ -1,0 +1,7 @@
+MANIFEST.MF
+persistence.xml
+
+
+*.jar
+*.war
+*.ear
