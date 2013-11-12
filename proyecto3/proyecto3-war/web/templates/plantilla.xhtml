@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      >
+     <head>
+                <meta charset="utf-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <meta name="description" content="" />
+                <meta name="author" content="Aither Integrations" />
+
+                <title>GeoCaching [Aither Integrations]</title>
+
+                <link href="/img/favicon.ico" rel="icon" type="image/x-icon" />
+
+                <!-- Bootstrap core CSS -->
+                <link href="css/bootstrap.min.css" rel="stylesheet" />
+                <link href="css/bootstrap-theme.min.css" rel="stylesheet" />
+
+                <!-- Add custom CSS here -->
+                <link href="css/half-slider.css" rel="stylesheet" />
+                <h:outputStylesheet name="common-style.css" library="css" />
+              </head>
+    <h:body>
+         
+     
+    	
+        <!-- header -->
+        <div id="header">
+            <ui:insert name="header" >
+              <ui:include src="headerjsf.xhtml" />
+            </ui:insert>
+        </div>
+        
+        <div id="containerprincipal" >
+             <div id="seccionprincipal" class="row section">
+                 
+                 <div class="col-md-8">
+                 <!-- principal -->
+                 <div id="contenido">
+                    <ui:insert name="contenido" >
+                      <ui:include src="contenido.xhtml" />
+                    </ui:insert>
+                  </div>
+                 
+                 </div>
+                 
+                 <!-- derecha -->
+                 
+                 <div id="menuderecha">
+                    <ui:insert name="menuderecha" >
+                      <ui:include src="menuderecha.xhtml" />
+                    </ui:insert>
+                
+                
+                 </div>
+             </div>
+        
+                <!-- footer -->
+                <div id="footer">
+                    <ui:insert name="footer" >
+                      <ui:include src="footer.xhtml" />
+                    </ui:insert>
+                </div>
+            
+         </div><!-- /.container -->
+    </h:body>
+</html>
+

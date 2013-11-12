@@ -20,9 +20,39 @@ html, body {
 }
 
 .section {
-	margin: 50px 0;
+/*	margin: 50px 0;*/
+}
+
+
+
+#menuderecha{
+
+}
+
+#seccionprincipal{
+	padding:4vw;
+	background-image: url("../img/ricepaper_v3.png");
+        margin-top:7vh;
+}
+
+#avataruser{
+	margin-bottom: 2vh;
+	margin-left: 4vw;
+}
+
+.white, .white a {
+  color: #fff;
+}
+
+#loginModal .modal-body{
+    background-image: url("../img/lock_small.png");
+    background-repeat:no-repeat;
 }
 
 footer {
-	margin: 50px 0;
+	/*margin: 50px 0;*/
+        padding: 7vh;        
+        
+        background-image: url("../img/cartographer.png");
+        color:white;
 }
