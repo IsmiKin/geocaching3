@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Validar Tesoros</title>
+    </h:head>
+    <h:body>
+        <f:view>
+            <h:form>
+                <h1><h:outputText value="List"/></h1>
+                <h:dataTable value="#{tesoroBean.obtenerTesorosPendientes()}" var="item">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="CodigoTesoro"/>
+                        </f:facet>
+                        <h:outputText value="#{item.codigoTesoro}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="CodigoValidacion"/>
+                        </f:facet>
+                        <h:outputText value="#{item.codigoValidacion}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Coordenadas"/>
+                        </f:facet>
+                        <h:outputText value="#{item.coordenadas}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Estado"/>
+                        </f:facet>
+                        <h:outputText value="#{item.estado}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="GoogleUrl"/>
+                        </f:facet>
+                        <h:outputText value="#{item.googleUrl}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="CodigoPostal"/>
+                        </f:facet>
+                        <h:outputText value="#{item.codigoPostal}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Pais"/>
+                        </f:facet>
+                        <h:outputText value="#{item.pais}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Localidad"/>
+                        </f:facet>
+                        <h:outputText value="#{item.localidad}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Provincia"/>
+                        </f:facet>
+                        <h:outputText value="#{item.provincia}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Estado Solicitud"/>
+                        </f:facet>
+                        <h:outputText value="#{item.solicitudTesoroidSolicitudTesoro.aprobado}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Usuario"/>
+                        </f:facet>
+                        <h:outputText value="#{item.usuarioidUsuario.nickname}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Evaluar"/>
+                        </f:facet>
+                        <h:commandButton id="validar" value="Evaluar" action="#{tesoroBean.prepararEvaluarTesoro(item)}" />
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </f:view>
+
+    </h:body>
+</html>
+

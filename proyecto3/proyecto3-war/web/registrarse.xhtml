@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+   
+    <h:body>
+        
+        <ui:composition template="/templates/plantilla.xhtml">
+ 
+            <ui:define name="contenido">
+                
+                <h:form>
+                    <div class="input-group input-group-lg"><span class="input-group-addon">Nombre</span><h:inputText class="form-control" value="#{loginApi.usuarioNuevo.nombre}" required="required" /></div><br/>
+                    <div class="input-group input-group-lg"><span class="input-group-addon">1er Apellido</span><h:inputText class="form-control" value="#{loginApi.usuarioNuevo.apellido1}" required="true" /></div><br/>
+                    <div class="input-group input-group-lg"><span class="input-group-addon">2do Apellido</span><h:inputText class="form-control" value="#{loginApi.usuarioNuevo.apellido2}" required="true" /></div><br/>
+                    <div class="input-group input-group-lg"><span class="input-group-addon">Nickname</span><h:inputText class="form-control" value="#{loginApi.usuarioNuevo.nickname}" /></div><br/>
+                    <div class="input-group input-group-lg"><span class="input-group-addon">Contraseña</span><h:inputText class="form-control" value="#{loginApi.usuarioNuevo.password}" /></div><br/>
+                    <div class="input-group input-group-lg"><span class="input-group-addon">Email @</span><h:inputText class="form-control" value="#{loginApi.usuarioNuevo.email}" /></div><br/>
+                    
+                    <h:button outcome="index.jsf" class="btn btn-primary" value="Volver a Inicio" />
+                    <h:commandButton type="submit" action="#{loginApi.registerUser()}" class="btn btn-success" value="Confirmar" />
+                </h:form>
+                
+            </ui:define>
+        </ui:composition>
+        
+    </h:body>
+</html>
+

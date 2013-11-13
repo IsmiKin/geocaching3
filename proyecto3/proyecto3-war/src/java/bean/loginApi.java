@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package usuario;
+package bean;
 
+import dao.RolFacade;
 import dao.UsuarioFacade;
 import entity.Usuario;
 import java.io.IOException;
@@ -13,14 +14,17 @@ import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author IsmiKin
  */
 @Named(value = "loginApi")
-@ApplicationScoped
+@SessionScoped
 public class loginApi implements Serializable {
+    @EJB
+    private RolFacade rolFacade;
     @EJB
     private UsuarioFacade usuarioFacade;
 
@@ -30,15 +34,18 @@ public class loginApi implements Serializable {
  
 
     private Usuario usuarioLogueado;
+    private Usuario usuarioNuevo;
     
-    private String nickname="";
-    private String password="";
-    private String levelAccess="";
+    private String nickname;
+    private String password;
+    private String levelAccess;
+    private HttpSession session;
     
     /**
      * Creates a new instance of userManager
      */
      public loginApi() {
+         
     }
      
     // GETTER AND SETTERS
@@ -81,19 +88,29 @@ public class loginApi implements Serializable {
     public void setLevelAccess(String levelAccess) {
         this.levelAccess = levelAccess;
     }
+
+    public Usuario getUsuarioNuevo() {
+        return usuarioNuevo;
+    }
+
+    public void setUsuarioNuevo(Usuario usuarioNuevo) {
+        this.usuarioNuevo = usuarioNuevo;
+    }
     
     
     
     // METODOS PROPIOS
     
-    public void checkExistUsername() throws IOException{
+    public String newUserReady() throws IOException{
         
-       
+       usuarioNuevo = new Usuario();
+       FacesContext.getCurrentInstance().getExternalContext().redirect("registrarse.jsf");
+       return "registrarse";
     }
     
     public void loginUser() throws IOException{
      
-        
+ 
         if(usuarioFacade.checkLogin(nickname, password))
             usuarioLogueado = usuarioFacade.getByNickname(nickname);
         else
@@ -102,21 +119,31 @@ public class loginApi implements Serializable {
         
          if(usuarioLogueado!=null){
              this.levelAccess =String.valueOf(usuarioLogueado.getRolidRol().getPrioridad()) ;
-             /*if(usuarioLogueado.getRolidRol().getPrioridad().equals("Administrador")) this.levelAccess = "0";
-             else if(usuarioLogueado.getRol().equals("Controlador")) this.levelAccess = "1";
-             else if(usuarioLogueado.getRol().equals("JefeServicio")) this.levelAccess = "2";
-             else if(usuarioLogueado.getRol().equals("Usuario")) this.levelAccess = "3";             */
          }
-            
+         
+         FacesContext context = FacesContext.getCurrentInstance();
+        session = (HttpSession) context.getExternalContext().getSession(true);
+         session.setAttribute("usuariologueado",usuarioLogueado);
         
          FacesContext.getCurrentInstance().getExternalContext().redirect("index.jsf");
     }
     
+    // Añadir un nuevo Usuario registrandolo
+    public void registerUser() throws IOException{
+        usuarioNuevo.setRolidRol(rolFacade.getByPrioridad(2));
+        usuarioNuevo.setEstado("activo");
+        usuarioFacade.create(usuarioNuevo);
+        usuarioNuevo = null;
+        usuarioNuevo = new Usuario();
+         FacesContext.getCurrentInstance().getExternalContext().redirect("index.jsf");
+    }
+    
+    
     // HAY QUE USAR SESSION.. ESTO ES UN PARCHE PASAJERO (ISMIKIN)
     public void logoutUser() throws IOException{
-        this.nickname ="";
-        this.password="";        
+        this.nickname =null;
+        this.password=null;        
         this.usuarioLogueado=null;
-         FacesContext.getCurrentInstance().getExternalContext().redirect("../home/index2.jsf");
+        FacesContext.getCurrentInstance().getExternalContext().redirect("forwardToJSF.jsf");
     }
 }

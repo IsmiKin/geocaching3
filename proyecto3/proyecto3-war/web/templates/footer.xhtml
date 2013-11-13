@@ -3,16 +3,14 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:ui="http://java.sun.com/jsf/facelets"
-          
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <body>
-	    <ui:composition>
- 
-		 
+	    <ui:composition>       
+                
       <footer>
         <div class="row">
           <div class="col-lg-12">
-              <p>Copyright &copy; Aither Integrations &middot;  <img src="img/logo_color_blanco.png" height="100"/> </p>
+              <p>Copyright &copy; Aither Integrations &middot;  <img src="../img/logo_color_blanco.png" height="100"/> </p>
              
           </div>
         </div>
@@ -32,8 +30,9 @@
                    
                       <div class="input-group input-group-lg">
                         <!-- <span class="input-group-addon">@</span>-->
-                        <input type="text" class="form-control" name="nickname" placeholder="Nickname" value="#{loginApi.nickname}"/>
-                        <input type="password" class="form-control" name="pass" placeholder="Contrasena" value="#{loginApi.password}"/>
+                        
+                        <h:inputText  class="form-control" id="nicknameinput"  value="#{loginApi.nickname}" />                                                                                                     
+                        <h:inputSecret  class="form-control"  value="#{loginApi.password}"/>
                       </div>
                    
                     
@@ -51,8 +50,8 @@
         <!-- Bootstrap core JavaScript -->
        <!-- Placed at the end of the document so the pages load faster -->
        <!-- Make sure to add jQuery - download the most recent version at http://jquery.com/ -->
-       <script src="js/jquery.js"></script>
-       <script src="js/bootstrap.min.js"></script>
+       <script src="../js/jquery.js"></script>
+       <script src="../js/bootstrap.min.js"></script>
        
 
    

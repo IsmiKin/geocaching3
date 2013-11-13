@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+  
+    <h:body>
+        
+         <ui:composition template="/templates/plantilla.xhtml">
+ 
+               <ui:define name="contenido">
+        
+        <f:view>
+            <h:form>
+                <h1><h:outputText value="Mis Busquedas"/></h1>
+                <h:dataTable class="table table-hover"  value="#{tesoroBean.obtenerMisBusquedas()}" var="item">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Tesoro"/>
+                        </f:facet>
+                        <h:outputText value="#{item.codigoTesoro}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Coordenadas"/>
+                        </f:facet>
+                        <h:outputText value="#{item.coordenadas}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Eliminar"/>
+                        </f:facet>
+                        <h:commandButton class="btn btn-danger"  id="eliminar" value="Eliminar de la Busqueda" action="#{tesoroBean.eliminarBusqueda(item)}" />
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </f:view>
+
+               </ui:define>
+         </ui:composition>
+                   
+    </h:body>
+</html>
+

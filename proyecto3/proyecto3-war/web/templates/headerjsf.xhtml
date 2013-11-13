@@ -3,14 +3,11 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      >
+          
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
     <body>
 	    <ui:composition>
  
-       
-
-          
-
     <nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -27,25 +24,51 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav">
             <li><a href="#about">Inicio</a></li>            
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tesoros <b class="caret"></b></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Buscar Tesoro</a></li>
-                <li><a href="#">Añadir Tesoro</a></li>
-                <li><a href="#">Validar Tesoro</a></li>                
-                <li><a href="#">Encontrados</a></li>
-                <li><a href="#">Mis Busquedas</a></li>
-                <li class="divider"></li>
-                <li><a href="#">Mis Tesoros</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Usuarios</a></li>           
+            <h:panelGroup layout="block" rendered="#{loginApi.usuarioLogueado.rolidRol.prioridad le 2}" >
+            
+                
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tesoros <b class="caret"></b></a>
+                  <ul class="dropdown-menu" role="menu">
+                      
+                      <li><a href="#">Buscar Tesoro</a></li>
+                   <!-- <li><a href="#">Añadir Tesoro</a></li>-->
+                    <li><a href="#">Validar Tesoro</a></li>                
+                    <li><a href="#">Encontrados</a></li>
+                    <li><a href="../tesoros/misBusquedas.jsf">Mis Busquedas</a></li>
+                    <h:panelGroup layout="block" rendered="#{loginApi.usuarioLogueado.rolidRol.prioridad le 1}" >
+                        <li class="divider"></li>
+                        <li><a href="../tesoros/readMisTesorosValidados.jsf">Mis Tesoros</a></li>
+                        <li><a href="../tesoros/misTesorosPendientes.jsf">Mis Tesoros Pendientes</a></li>
+                    </h:panelGroup>
+                    <h:panelGroup layout="block" rendered="#{loginApi.usuarioLogueado.rolidRol.prioridad le 0}" >
+                        <li class="divider"></li>
+                        <li><a href="../tesoros/readTesoros.jsf">Administrar Tesoros</a></li>
+                    </h:panelGroup>
+                  </ul>
+                </li>
+            </h:panelGroup>
+            <h:panelGroup layout="block" rendered="#{loginApi.usuarioLogueado.rolidRol.prioridad le 0}" >
+                <li><a href="#">Usuarios</a></li>  
+            </h:panelGroup>
+                     
           </ul>
          
           <form class="navbar-form navbar-right">
           
-            <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#loginModal"><span class="glyphicon" ><img src="img/glyphicons/glyphicons_044_keys.png"/></span>  Login</button> 
-            <button type="button" class="btn btn-primary"><span class="glyphicon" ><img src="img/glyphicons/glyphicons_006_user_add.png"/></span>  Registrarse</button>
+            <h:form>                               
+                <h:panelGroup layout="block" rendered="#{loginApi.usuarioLogueado eq null}" >
+                    <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#loginModal"><span class="glyphicon" ><img src="../img/glyphicons/glyphicons_044_keys.png"/></span>  Login</button> 
+                    <h:commandButton action="#{loginApi.newUserReady()}" class="btn btn-primary" value="Registrarse"><!--<span class="glyphicon"  ><img src="img/glyphicons/glyphicons_006_user_add.png"/></span> --></h:commandButton>
+                </h:panelGroup>
+            </h:form>
+            
+              <h:panelGroup layout="block" rendered="#{loginApi.usuarioLogueado ne null }" >
+                <h:form>                
+                    <h:commandButton  class="btn btn-danger" action="#{loginApi.logoutUser()}" value=" Logout"></h:commandButton>
+                </h:form>
+            </h:panelGroup>
+                
             </form>
             </div><!-- /.navbar-collapse -->
 
@@ -63,19 +86,19 @@
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner">
                   <div class="item active">
-                    <div class="fill" style="background-image:url('img/primera.png');"></div>
+                    <div class="fill" style="background-image:url('../img/primera.png');"></div>
                     <div class="carousel-caption">
                       <h1>¡Revive tu espiritu aventurero!</h1>
                     </div>
                   </div>
                   <div class="item">
-                    <div class="fill" style="background-image:url('img/segunda.png');"></div>
+                    <div class="fill" style="background-image:url('../img/segunda.png');"></div>
                     <div class="carousel-caption">
                       <h1><font color="black">Tesoros por todo el mundo</font></h1>
                     </div>
                   </div>
                   <div class="item">
-                    <div class="fill" style="background-image:url('img/tercera.png');"></div>
+                    <div class="fill" style="background-image:url('../img/tercera.png');"></div>
                     <div class="carousel-caption">
                       <h1>No pares de añadir tesoros a tus cofres</h1>
                     </div>

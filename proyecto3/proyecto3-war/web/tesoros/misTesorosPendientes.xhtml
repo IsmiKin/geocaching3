@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+  
+    <h:body>
+        <ui:composition template="../templates/plantilla.xhtml">
+
+            <ui:define name="contenido">
+                    <f:view>
+                       <h:form>
+                           <h1><h:outputText value="Mis Tesoros Pendientes"/></h1>
+                           <h:dataTable  class="table table-hover"  value="#{tesoroBean.obtenerMisTesorosPendientes()}" var="item">
+                               <!--<h:column>
+                                   <f:facet name="header">
+                                       <h:outputText value="IdTesoro"/>
+                                   </f:facet>
+                                   <h:outputText value="#{item.idTesoro}"/>
+                               </h:column>-->
+                               <h:column>
+                                   <f:facet name="header">
+                                       <h:outputText value="CodigoTesoro"/>
+                                   </f:facet>
+                                   <h:outputText value="#{item.codigoTesoro}"/>
+                               </h:column>
+                            <!--   <h:column>
+                                   <f:facet name="header">
+                                       <h:outputText value="CodigoValidacion"/>
+                                   </f:facet>
+                                   <h:outputText value="#{item.codigoValidacion}"/>
+                               </h:column>-->
+                               <h:column>
+                                   <f:facet name="header">
+                                       <h:outputText value="Coordenadas"/>
+                                   </f:facet>
+                                   <h:outputText value="#{item.coordenadas}"/>
+                               </h:column>
+                               <h:column>
+                                   <f:facet name="header">
+                                       <h:outputText value="Estado"/>
+                                   </f:facet>
+                                   <h:outputText value="#{item.estado}"/>
+                               </h:column>
+                               <h:column>
+                                   <f:facet name="header">
+                                       <h:outputText value="GoogleUrl"/>
+                                   </f:facet>
+                                   <h:outputText value="#{item.googleUrl}"/>
+                               </h:column>
+                               <h:column>
+                                   <f:facet name="header">
+                                       <h:outputText value="CP"/>
+                                   </f:facet>
+                                   <h:outputText value="#{item.codigoPostal}"/>
+                               </h:column>
+                               <h:column>
+                                   <f:facet name="header">
+                                       <h:outputText value="Pais"/>
+                                   </f:facet>
+                                   <h:outputText value="#{item.pais}"/>
+                               </h:column>
+                               <h:column>
+                                   <f:facet name="header">
+                                       <h:outputText value="Localidad"/>
+                                   </f:facet>
+                                   <h:outputText value="#{item.localidad}"/>
+                               </h:column>
+                               <h:column>
+                                   <f:facet name="header">
+                                       <h:outputText value="Provincia"/>
+                                   </f:facet>
+                                   <h:outputText value="#{item.provincia}"/>
+                               </h:column>
+                               <h:column>
+                                   <f:facet name="header">
+                                       <h:outputText value="Estado Solicitud"/>
+                                   </f:facet>
+                                   <h:outputText value="#{item.solicitudTesoroidSolicitudTesoro.aprobado}"/>
+                               </h:column>
+                           </h:dataTable>
+                       </h:form>
+                   </f:view>
+            </ui:define>
+        </ui:composition>
+       
+
+    </h:body>
+</html>
+

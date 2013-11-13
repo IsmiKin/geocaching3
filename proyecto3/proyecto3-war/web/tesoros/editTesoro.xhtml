@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    
+    <h:body>
+        
+         <ui:composition template="/templates/plantilla.xhtml">
+ 
+               <ui:define name="contenido">
+        
+        <f:view>
+            <h:form>
+                <h1><h:outputText value="Create/Edit"/></h1>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="CodigoTesoro:" for="codigoTesoro" />
+                    <h:inputText id="codigoTesoro" value="#{tesoroBean.tesoroAEditar.codigoTesoro}" title="CodigoTesoro" required="true" requiredMessage="The CodigoTesoro field is required."/>
+                    <h:outputLabel value="CodigoValidacion:" for="codigoValidacion" />
+                    <h:inputText id="codigoValidacion" value="#{tesoroBean.tesoroAEditar.codigoValidacion}" title="CodigoValidacion" required="true" requiredMessage="The CodigoValidacion field is required."/>
+                    <h:outputLabel value="Coordenadas:" for="coordenadas" />
+                    <h:inputText id="coordenadas" value="#{tesoroBean.tesoroAEditar.coordenadas}" title="Coordenadas" required="true" requiredMessage="The Coordenadas field is required."/>
+                    <h:outputLabel value="Estado:" for="estado" />
+                    <h:selectOneMenu style="height:100;" value="#{tesoroBean.tesoroAEditar.estado}">
+                                                    <f:selectItem itemLabel="ACTIVO" itemValue="ACTIVO" />
+                                                    <f:selectItem itemLabel="PERDIDO" itemValue="PERDIDO" />
+                                                    <f:selectItem itemLabel="MANTENIMIENTO" itemValue="MANTENIMIENTO" />
+                                                    <f:selectItem itemLabel="INACTIVO" itemValue="INACTIVO" />
+                                            </h:selectOneMenu>
+                    <h:outputLabel value="GoogleUrl:" for="googleUrl" />
+                    <h:inputText id="googleUrl" value="#{tesoroBean.tesoroAEditar.googleUrl}" title="GoogleUrl" />
+                    <h:outputLabel value="CodigoPostal:" for="codigoPostal" />
+                    <h:inputText id="codigoPostal" value="#{tesoroBean.tesoroAEditar.codigoPostal}" title="CodigoPostal" />
+                    <h:outputLabel value="Pais:" for="pais" />
+                    <h:inputText id="pais" value="#{tesoroBean.tesoroAEditar.pais}" title="Pais" required="true" requiredMessage="The Pais field is required."/>
+                    <h:outputLabel value="Localidad:" for="localidad" />
+                    <h:inputText id="localidad" value="#{tesoroBean.tesoroAEditar.localidad}" title="Localidad" required="true" requiredMessage="The Localidad field is required."/>
+                    <h:outputLabel value="Provincia:" for="provincia" />
+                    <h:inputText id="provincia" value="#{tesoroBean.tesoroAEditar.provincia}" title="Provincia" required="true" requiredMessage="The Provincia field is required."/>
+                    <h:commandButton id="crear" value="Editar" action="#{tesoroBean.editarTesoro()}" />
+                </h:panelGrid>
+            </h:form>
+        </f:view>
+                   
+               </ui:define>
+         </ui:composition>
+                   
+    </h:body>
+</html>
+
