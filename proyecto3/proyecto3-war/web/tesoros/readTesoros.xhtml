@@ -63,24 +63,24 @@
                                         </f:facet>
                                         <h:outputText value="#{item.pais}"/>
                                     </h:column>
-                                    <h:column>
+                                    <!--<h:column>
                                         <f:facet name="header">
                                             <h:outputText value="Localidad"/>
                                         </f:facet>
                                         <h:outputText value="#{item.localidad}"/>
-                                    </h:column>
+                                    </h:column>-->
                                     <h:column>
                                         <f:facet name="header">
                                             <h:outputText value="Provincia"/>
                                         </f:facet>
                                         <h:outputText value="#{item.provincia}"/>
                                     </h:column>
-                                    <h:column>
+                                    <!--<h:column>
                                         <f:facet name="header">
                                             <h:outputText value="B.Logico"/>
                                         </f:facet>
                                         <h:outputText value="#{item.borradoLogico}"/>
-                                    </h:column>
+                                    </h:column>-->
                                     <h:column>
                                         <f:facet name="header">
                                             <h:outputText value="Solicitud"/>
@@ -92,6 +92,17 @@
                                             <h:outputText value="Usuario"/>
                                         </f:facet>
                                         <h:outputText value="#{item.usuarioidUsuario.nombre}"/>
+                                    </h:column>
+                                  <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Acciones"/>
+                                        </f:facet>
+                                      
+                                      <h:commandButton action="#{cacheBean.detallesTesoro()}"  image="../img/glyphicons/glyphicons_025_binoculars.png">
+                                          <f:setPropertyActionListener target="#{cacheBean.seleccionado}" value="#{item}" />                                         
+                                          <f:setPropertyActionListener target="#{cacheBean.paginaLlamante}" value="#{view.viewId}" />                                         
+                                      </h:commandButton>
+                                     
                                     </h:column>
                                 </h:dataTable>
                             </h:form>

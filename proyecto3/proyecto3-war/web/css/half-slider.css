@@ -52,7 +52,7 @@ html, body {
 footer {
 	/*margin: 50px 0;*/
         padding: 7vh;        
-        
+        width:100%;
         background-image: url("../img/cartographer.png");
         color:white;
 }

@@ -22,7 +22,7 @@
                     <h:outputLabel value="Coordenadas:" for="coordenadas" />
                     <h:inputText id="coordenadas" value="#{tesoroBean.tesoroAEditar.coordenadas}" title="Coordenadas" required="true" requiredMessage="The Coordenadas field is required."/>
                     <h:outputLabel value="Estado:" for="estado" />
-                    <h:selectOneMenu style="height:100;" value="#{tesoroBean.tesoroAEditar.estado}">
+                    <h:selectOneMenu class="form-control" style="height:100;" value="#{tesoroBean.tesoroAEditar.estado}">
                                                     <f:selectItem itemLabel="ACTIVO" itemValue="ACTIVO" />
                                                     <f:selectItem itemLabel="PERDIDO" itemValue="PERDIDO" />
                                                     <f:selectItem itemLabel="MANTENIMIENTO" itemValue="MANTENIMIENTO" />

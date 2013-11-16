@@ -23,33 +23,36 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="#about">Inicio</a></li>            
+            <li><a href="#about">Inicio</a></li>
+            
             <h:panelGroup layout="block" rendered="#{loginApi.usuarioLogueado.rolidRol.prioridad le 2}" >
             
                 
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tesoros <b class="caret"></b></a>
                   <ul class="dropdown-menu" role="menu">
-                      
-                      <li><a href="#">Buscar Tesoro</a></li>
+           <h:panelGroup layout="block" rendered="#{loginApi.usuarioLogueado.rolidRol.prioridad gt 0}" >
+                      <li><a href="../tesoros/crearBusqueda.jsf">Buscar Tesoro</a></li>
                    <!-- <li><a href="#">Añadir Tesoro</a></li>-->
-                    <li><a href="#">Validar Tesoro</a></li>                
-                    <li><a href="#">Encontrados</a></li>
+                    <li><a href="../tesoros/readTesorosValidados.jsf">Listar Todos Tesoros</a></li>                 
+                    <li><a href="../tesoros/tesorosEncontrados.jsf">Encontrados</a></li>
                     <li><a href="../tesoros/misBusquedas.jsf">Mis Busquedas</a></li>
                     <h:panelGroup layout="block" rendered="#{loginApi.usuarioLogueado.rolidRol.prioridad le 1}" >
                         <li class="divider"></li>
                         <li><a href="../tesoros/readMisTesorosValidados.jsf">Mis Tesoros</a></li>
                         <li><a href="../tesoros/misTesorosPendientes.jsf">Mis Tesoros Pendientes</a></li>
                     </h:panelGroup>
+           </h:panelGroup>
                     <h:panelGroup layout="block" rendered="#{loginApi.usuarioLogueado.rolidRol.prioridad le 0}" >
                         <li class="divider"></li>
                         <li><a href="../tesoros/readTesoros.jsf">Administrar Tesoros</a></li>
+                        <li><a href="../tesoros/validateTesoro.jsf">Validar Pendientes</a></li>
                     </h:panelGroup>
                   </ul>
                 </li>
             </h:panelGroup>
             <h:panelGroup layout="block" rendered="#{loginApi.usuarioLogueado.rolidRol.prioridad le 0}" >
-                <li><a href="#">Usuarios</a></li>  
+                <li><a href="../usuarios/listUser.jsf">Usuarios</a></li>  
             </h:panelGroup>
                      
           </ul>
@@ -63,7 +66,7 @@
                 </h:panelGroup>
             </h:form>
             
-              <h:panelGroup layout="block" rendered="#{loginApi.usuarioLogueado ne null }" >
+              <h:panelGroup style="float:right; margin-top:10px" layout="block" rendered="#{loginApi.usuarioLogueado ne null }" >
                 <h:form>                
                     <h:commandButton  class="btn btn-danger" action="#{loginApi.logoutUser()}" value=" Logout"></h:commandButton>
                 </h:form>

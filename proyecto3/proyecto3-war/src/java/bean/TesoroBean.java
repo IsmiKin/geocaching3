@@ -47,9 +47,6 @@ public class TesoroBean implements Serializable {
 
     private loginApi userManager;
 
- 
-
-
     private Tesoro nuevoTesoro;
     private Tesoro tesoroAValidar;
     private Tesoro tesoroAEditar;
@@ -120,7 +117,7 @@ public class TesoroBean implements Serializable {
         nuevoTesoro.setUsuarioidUsuario(usuarioFacade.find(logueado.getIdUsuario()));
         nuevoTesoro.setSolicitudTesoroidSolicitudTesoro(sol);
         tesoroFacade.create(nuevoTesoro);
-        return "/tesoros/readTesoros.jsf";
+        return "/tesoros/readMisTesorosValidados.jsf";
         }
         catch (Exception e)
         {
@@ -155,12 +152,21 @@ public class TesoroBean implements Serializable {
     
     public String evaluarTesoro()
     {
+        if(solicitudAEvaluar.equals("ACEPTADO"))
+        {
         Usuario u;
         solicitudtesoroFacade.edit(solicitudAEvaluar);
         u = usuarioFacade.find(tesoroAValidar.getUsuarioidUsuario().getIdUsuario());
-        u.setRolidRol(rolFacade.find(Integer.parseInt("2")));
+        u.setRolidRol(rolFacade.getByPrioridad(1));
         usuarioFacade.edit(u);
         return "/tesoros/readTesorosValidados.jsf";
+        }
+        else
+        {
+            Usuario u;
+            solicitudtesoroFacade.edit(solicitudAEvaluar);
+            return "/tesoros/readTesorosValidados.jsf";
+        }
     }
     
     public String prepararEditarTesoro(Tesoro t)
@@ -192,13 +198,25 @@ public class TesoroBean implements Serializable {
         Busquedatesoros bt = new Busquedatesoros();
         BusquedatesorosPK btpk = new BusquedatesorosPK();
         /*Aqui va el usuario logueado*/
+        
+           FacesContext context = FacesContext.getCurrentInstance();
+        session = (HttpSession) context.getExternalContext().getSession(true);
+         Usuario logueado = (Usuario) session.getAttribute("usuariologueado");
+        
         btpk.setTesoroidTesoro(t.getIdTesoro());
-        btpk.setUsuarioidUsuario(Integer.parseInt("1"));
+        btpk.setUsuarioidUsuario(logueado.getIdUsuario());
         bt.setBusquedatesorosPK(btpk);
-        bt.setUsuario(usuarioFacade.find(Integer.parseInt("1")));
-        bt.setTesoro(t);
+        bt.setUsuario(logueado);
+        bt.setTesoro(tesoroFacade.find(t.getIdTesoro()));
         busquedatesorosFacade.create(bt);
         return "/tesoros/misBusquedas.jsf";
+    }
+    
+    
+    // Added by IsmiKin : necesita este metodo para poder añadir busqueda desde
+    // otra vista que no sea el listar
+    public void crearBusqueda(){
+        crearBusqueda(nuevoTesoro);
     }
     
     public List<Tesoro> obtenerTesorosSinBuscar()
@@ -210,7 +228,10 @@ public class TesoroBean implements Serializable {
          
         List<Tesoro> listatesorosdisponibles = tesoroFacade.getAllTesorosbyEstadoSolicitud("aceptado");
         List<Tesoro> listatesorosbuscados = busquedatesorosFacade.getBusquedasByUser(logueado.getIdUsuario());
+        
+        if(listatesorosbuscados != null){
         listatesorosdisponibles.removeAll(listatesorosbuscados);
+        }
         return listatesorosdisponibles;
     }
     
@@ -265,6 +286,16 @@ public class TesoroBean implements Serializable {
 
     public void setSolicitudAEvaluar(Solicitudtesoro solicitudAEvaluar) {
         this.solicitudAEvaluar = solicitudAEvaluar;
+    }
+    
+    public List<Tesoro> obtenerTesorosEncontrados()
+    {
+          FacesContext context = FacesContext.getCurrentInstance();
+         session = (HttpSession) context.getExternalContext().getSession(true);
+          Usuario logueado = (Usuario) session.getAttribute("usuariologueado");
+        
+          return tesoroFacade.getTesorosEncontrados(logueado) ;
+        
     }
     
     

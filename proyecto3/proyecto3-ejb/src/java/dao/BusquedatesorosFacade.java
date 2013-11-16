@@ -58,4 +58,57 @@ public class BusquedatesorosFacade extends AbstractFacade<Busquedatesoros> {
             
         }
     }
+     public List<Busquedatesoros> findByUsuarioIdUsuario(Integer idUsuario){
+        
+        List<Busquedatesoros> u = null;
+        
+        try{
+            Query q = em.createQuery("SELECT b FROM Busquedatesoros b WHERE b.busquedatesorosPK.usuarioidUsuario = :usuarioidUsuario AND b.borradoLogico = 0");
+            q.setParameter("usuarioidUsuario", idUsuario);
+            
+            u = q.getResultList();
+        }catch (Exception e){} 
+        return u;
+    }
+    
+    public List<Busquedatesoros> findByTesoroIdTesoro(Integer idTesoro){
+        
+        List<Busquedatesoros> t = null;
+        
+        try{
+            Query q = em.createQuery("SELECT b FROM Busquedatesoros b WHERE b.busquedatesorosPK.tesoroidTesoro = :tesoroidTesoro AND b.borradoLogico = 0");
+            q.setParameter("tesoroidTesoro", idTesoro);
+            
+            t = q.getResultList();
+        }catch (Exception e){}
+        
+        return t;
+    }
+    
+    public Busquedatesoros findByTesoroIdTesoroAndByUser(Integer idTesoro, Integer idUsuario){
+        
+        Busquedatesoros t = null;
+        
+        try{
+            Query q = em.createQuery("SELECT b FROM Busquedatesoros b WHERE b.busquedatesorosPK.tesoroidTesoro = :tesoroidTesoro AND b.busquedatesorosPK.usuarioidUsuario = :usuarioidUsuario AND b.borradoLogico = 0");
+            q.setParameter("tesoroidTesoro", idTesoro);
+            q.setParameter("usuarioidUsuario", idUsuario);
+            t = (Busquedatesoros) q.getSingleResult();
+        }catch (Exception e){}
+        
+        return t;
+    }
+    public void borradoLogico(Busquedatesoros bt){
+        bt.setBorradoLogico(true);
+        super.edit(bt);
+        
+    }
+    public void borradoLogico(Integer idTesoro,Integer idUsuario){
+        try{
+            Query q = em.createQuery("UPDATE Busquedatesoros b SET b.borradoLogico = 1 WHERE b.busquedatesorosPK.tesoroidTesoro = :tesoroidTesoro AND b.busquedatesorosPK.usuarioidUsuario = :usuarioidUsuario");
+            q.setParameter("tesoroidTesoro", idTesoro);
+            q.setParameter("usuarioidUsuario", idUsuario);
+        }catch (Exception e){}
+    }
+    
 }

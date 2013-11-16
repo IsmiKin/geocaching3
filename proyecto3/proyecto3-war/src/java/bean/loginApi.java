@@ -104,7 +104,7 @@ public class loginApi implements Serializable {
     public String newUserReady() throws IOException{
         
        usuarioNuevo = new Usuario();
-       FacesContext.getCurrentInstance().getExternalContext().redirect("registrarse.jsf");
+       FacesContext.getCurrentInstance().getExternalContext().redirect("/proyecto3-war/principal/registrarse.jsf");
        return "registrarse";
     }
     
@@ -114,7 +114,7 @@ public class loginApi implements Serializable {
         if(usuarioFacade.checkLogin(nickname, password))
             usuarioLogueado = usuarioFacade.getByNickname(nickname);
         else
-            FacesContext.getCurrentInstance().getExternalContext().redirect("errorLogin.jsf");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/proyecto3-war/principal/errorLogin.jsf");
             
         
          if(usuarioLogueado!=null){
@@ -125,7 +125,7 @@ public class loginApi implements Serializable {
         session = (HttpSession) context.getExternalContext().getSession(true);
          session.setAttribute("usuariologueado",usuarioLogueado);
         
-         FacesContext.getCurrentInstance().getExternalContext().redirect("index.jsf");
+         FacesContext.getCurrentInstance().getExternalContext().redirect("/proyecto3-war/principal/index.jsf");
     }
     
     // Añadir un nuevo Usuario registrandolo
@@ -135,7 +135,12 @@ public class loginApi implements Serializable {
         usuarioFacade.create(usuarioNuevo);
         usuarioNuevo = null;
         usuarioNuevo = new Usuario();
-         FacesContext.getCurrentInstance().getExternalContext().redirect("index.jsf");
+        
+        FacesContext context = FacesContext.getCurrentInstance();
+        session = (HttpSession) context.getExternalContext().getSession(true);
+         session.setAttribute("usuariologueado",null);
+        
+         FacesContext.getCurrentInstance().getExternalContext().redirect("/proyecto3-war/principal/index.jsf");
     }
     
     
@@ -144,6 +149,6 @@ public class loginApi implements Serializable {
         this.nickname =null;
         this.password=null;        
         this.usuarioLogueado=null;
-        FacesContext.getCurrentInstance().getExternalContext().redirect("forwardToJSF.jsf");
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/proyecto3-war/principal/index.jsf");
     }
 }

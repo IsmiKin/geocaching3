@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Validar Tesoro</title>
+    </h:head>
+    <h:body>
+       
+        <h:form>
+                <h1><h:outputText value="Validar Tesoro"/></h1>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Buscar Tesoro:" for="codigoTesoro" />
+                    <h:inputText id="codigoTesoro" value="#{logBean.v_tesoro}" title="codigoTesoro" />
+                    <h:commandButton value="Validar" action="#{logBean.validar()}" />
+                    
+                    <h:outputLabel value="Comentario:" for="comentario"  />
+                    <h:inputTextarea id="comentario" value="#{logBean.comentario}" title="comentario" />
+                </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>
+

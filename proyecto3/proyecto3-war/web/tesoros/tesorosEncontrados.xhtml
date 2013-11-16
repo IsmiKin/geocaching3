@@ -4,23 +4,18 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-   
+    
     <h:body>
-         <ui:composition template="/templates/plantilla.xhtml">
+        
+          <ui:composition template="/templates/plantilla.xhtml">
  
                <ui:define name="contenido">
         
-        
         <f:view>
             <h:form>
-                <h1><h:outputText value="List"/></h1>
-                <h:dataTable value="#{tesoroBean.obtenerTesorosSinBuscar()}" var="item">
-                    <!--<h:column>
-                        <f:facet name="header">
-                            <h:outputText value="IdTesoro"/>
-                        </f:facet>
-                        <h:outputText value="#{item.idTesoro}"/>
-                    </h:column>-->
+                <h1><h:outputText value="Tesoros Encontrados"/></h1>
+                <h:dataTable class="table table-hover" value="#{tesoroBean.obtenerTesorosEncontrados()}" var="item">
+                    
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Codigo"/>
@@ -39,13 +34,13 @@
                         </f:facet>
                         <h:outputText value="#{item.coordenadas}"/>
                     </h:column>
-                    <h:column>
+                    <!--<h:column>
                         <f:facet name="header">
                             <h:outputText value="Estado"/>
                         </f:facet>
                         <h:outputText value="#{item.estado}"/>
                     </h:column>
-                   <!-- <h:column>
+                    <h:column>
                         <f:facet name="header">
                             <h:outputText value="GoogleUrl"/>
                         </f:facet>
@@ -56,13 +51,13 @@
                             <h:outputText value="CodigoPostal"/>
                         </f:facet>
                         <h:outputText value="#{item.codigoPostal}"/>
-                    </h:column>
+                    </h:column>-->
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Pais"/>
                         </f:facet>
                         <h:outputText value="#{item.pais}"/>
-                    </h:column>-->
+                    </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Localidad"/>
@@ -75,42 +70,34 @@
                         </f:facet>
                         <h:outputText value="#{item.provincia}"/>
                     </h:column>
-                   <!-- <h:column>
+                    <!--<h:column>
                         <f:facet name="header">
                             <h:outputText value="BorradoLogico"/>
                         </f:facet>
                         <h:outputText value="#{item.borradoLogico}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="SolicitudTesoroidSolicitudTesoro"/>
-                        </f:facet>
-                        <h:outputText value="#{item.solicitudTesoroidSolicitudTesoro}"/>
                     </h:column>-->
                     <h:column>
                         <f:facet name="header">
-                            <h:outputText value="UsuarioidUsuario"/>
+                            <h:outputText value="Usuario"/>
                         </f:facet>
                         <h:outputText value="#{item.usuarioidUsuario.nickname}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
-                            <h:outputText value="Buscar"/>
+                            <h:outputText value="Acciones"/>
                         </f:facet>
-                         <h:commandButton action="#{cacheBean.detallesTesoro()}"  image="../img/glyphicons/glyphicons_025_binoculars.png">
+                        <h:commandButton action="#{cacheBean.detallesTesoro()}"  image="../img/glyphicons/glyphicons_025_binoculars.png">
                                           <f:setPropertyActionListener target="#{cacheBean.seleccionado}" value="#{item}" />                                         
                                           <f:setPropertyActionListener target="#{cacheBean.paginaLlamante}" value="#{view.viewId}" />                                         
-                        </h:commandButton>  
-                        <h:commandButton style="margin: 3px;" class="btn btn-primary" image="../img/glyphicons/glyphicons_432_plus.png" action="#{tesoroBean.crearBusqueda()}">
-                                        <f:setPropertyActionListener target="#{tesoroBean.nuevoTesoro}"  value="#{item}" />
-                        </h:commandButton><br/>
+                        </h:commandButton>                                      
                     </h:column>
                 </h:dataTable>
             </h:form>
         </f:view>
 
                </ui:define>
-         </ui:composition>
+          </ui:composition>
+                   
     </h:body>
 </html>
 
