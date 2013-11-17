@@ -14,7 +14,7 @@
                 <f:view>
                     <h:form>
                                                 
-                        <h1><h:outputText value="Mis Tesoros"/></h1>
+                        <h1><img src="../img/iconos/mistesoros.png" height="100"/><h:outputText value="Mis Tesoros" /></h1>
                         <h:commandButton class="btn btn-success"  id="crear" value="Crear" action="#{tesoroBean.prepararCrearTesoro()}" />
                         <h:dataTable class="table table-hover" value="#{tesoroBean.obtenerMisTesorosValidados()}" var="item">
                             <h:column>
