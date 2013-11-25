@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+  
+    <h:body>
+        
+         <ui:composition template="/templates/plantilla.xhtml">
+ 
+               <ui:define name="contenido">
+        
+                     <script src="../js/detallesTesoro.js"   />
+                   
+        <f:view>
+            <h:form>
+                <h1><img src="../img/iconos/misbusquedas.png" height="100"/><h:outputText value="Mis Busquedas"/></h1>
+                <h:dataTable class="table table-hover"  value="#{tesoroBean.obtenerMisBusquedas()}" var="item">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Tesoro"/>
+                        </f:facet>
+                        <h:outputText value="#{item.codigoTesoro}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Coordenadas"/>
+                        </f:facet>
+                        <h:outputText value="#{item.coordenadas}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Acciones"/>
+                        </f:facet>
+                        
+                        <h:commandButton action="#{cacheBean.detallesTesoro()}"  image="../img/glyphicons/glyphicons_025_binoculars.png">
+                                          <f:setPropertyActionListener target="#{cacheBean.seleccionado}" value="#{item}" />                                         
+                                          <f:setPropertyActionListener target="#{cacheBean.paginaLlamante}" value="#{view.viewId}" />                                         
+                       </h:commandButton> 
+                        &nbsp;&nbsp;
+                        <h:commandButton class="btn btn-danger" image="../img/glyphicons/glyphicons_016_bin.png"   id="eliminar" value="Eliminar de la Busqueda" action="#{tesoroBean.eliminarBusqueda(item)}" /> 
+                        <button data-toggle="modal" data-opcion="Confirmar" id="modalConfirmar" data-opcioncode="0" data-target="#logModal"  style="margin: 3px;" class="btn btn-success btn-menudetalles" ><span  class="glyphicon glyphicon-check" ></span></button>           
+                        <button data-toggle="modal" data-opcion="Reportar"   id="modalReportar" data-opcioncode="1" data-target="#logModal"  style="margin: 3px;" class="btn btn-danger btn-menudetalles" ><span  class="glyphicon glyphicon-flag" ></span></button>
+                       
+                    </h:column>
+           
+                </h:dataTable>
+            </h:form>
+            
+             <h:form>
+                <!-- VENTANA MODAL -->
+                  <div class="modal fade" id="logModal" tabindex="-1" role="dialog" aria-labelledby="logModal" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                              <h4 class="modal-title" id="myModalLabel">  </h4>
+                            </div>
+                           
+                              <div class="modal-body">
+
+                                  <div class="input-group input-group-lg">
+                                    <!-- <span class="input-group-addon">@</span>-->
+                                    <div class="codigoValidacionInput"> Validacion<h:inputText class="form-control" id="codigoTesoro" value="#{logBean.v_tesoro}" title="Validacion" /><br/><br/></div>
+                                    Comentario  <h:inputTextarea  class="form-control" rows="4" id="comentarioTesoro"  value="#{logBean.comentario}" title="Comentario" />                                                                                                                                         
+                                  </div>
+
+
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                              <h:commandButton value="Confirmar" id="confirmarTesoro" class="btn btn-success acciondetalles confirmarTesoro"  action="#{logBean.validar()}" >
+                                  <f:setPropertyActionListener target="#{logBean.tesoro}"  value="#{cacheBean.seleccionado}" />
+                              </h:commandButton>
+                              <h:commandButton value="Reportar" class="btn btn-danger acciondetalles reportarTesoro" id="reportarTesoro" action="#{logBean.problemLog()}" >
+                                <f:setPropertyActionListener target="#{logBean.tesoro}"  value="#{cacheBean.seleccionado}" />
+                              </h:commandButton>
+                              
+                              
+                            </div>
+                          </div>
+                        </div>
+                  </div>
+              </h:form>
+                <!-- FIN VENTANA MODAL -->
+            
+            
+        </f:view>
+
+               </ui:define>
+         </ui:composition>
+                   
+    </h:body>
+</html>
+

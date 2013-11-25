@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        
+            <ui:composition template="..//templates/plantilla.xhtml">
+ 
+               <ui:define name="contenido">
+        
+        <f:view>
+            <h:form target="#{userManagedBean}">
+                <h1><img src="../img/iconos/edituser.png"/><h:outputText value="Editar Usuario"/></h1>
+                
+                   
+                    
+                     <h:inputHidden id="idUsuario" value="#{userManagedBean.editable.idUsuario}" />                    
+                    <br/>
+                    <div class="input-group  col-sm-8"><span class="input-group-addon">Nombre</span><h:inputText class="form-control"  value="#{userManagedBean.editable.nombre}" title="Nombre" required="true" requiredMessage="The Nombre field is required."/></div><br/><br/>
+                     <div class="input-group col-sm-8"><span class="input-group-addon">1er Apellido</span><h:inputText class="form-control"   value="#{userManagedBean.editable.apellido1}" title="Apellido1" required="true" requiredMessage="The Apellido1 field is required."/></div><br/><br/>
+                     <div class="input-group col-sm-8"><span class="input-group-addon">2do Apellido</span><h:inputText class="form-control" value="#{userManagedBean.editable.apellido2}" title="Apellido2" required="true" requiredMessage="The Apellido2 field is required."/></div><br/><br/>
+                     <div class="input-group col-sm-8"><span class="input-group-addon">Email @</span><h:inputText class="form-control" value="#{userManagedBean.editable.email}" title="Email" required="true" requiredMessage="The Email field is required."/></div><br/><br/>
+                    <div class="input-group  col-sm-8"><span class="input-group-addon">Nickname</span><h:inputText class="form-control" value="#{userManagedBean.editable.nickname}" title="Nickname" required="true" requiredMessage="The Nickname field is required."/></div><br/><br/>
+                    
+                    <div class="input-group  col-sm-8">
+                        <h:selectOneMenu value="#{userManagedBean.editable.estado}" class="form-control"  title="Estado" required="true" requiredMessage="The Estado field is required.">
+                            <f:selectItem itemValue="Activo" itemLabel="Activo" />
+                            <f:selectItem itemValue="Inactivo" itemLabel="Inactivo" />
+                            <f:selectItem itemValue="Baneado" itemLabel="Baneado" />
+                        </h:selectOneMenu>
+                    </div>
+                    <br/><br/>
+                    
+                    <div class="input-group  col-sm-8"><span class="input-group-addon">Password</span><h:inputSecret class="form-control" value="#{userManagedBean.editable.password}" redisplay="true" title="Password" required="true" requiredMessage="The Password field is required."/></div><br/><br/>
+                    
+                    <!--<h:outputLabel value="BorradoLogico:" for="borradoLogico" />
+                    <h:selectBooleanCheckbox value="#{userManagedBean.editable.borradoLogico}" />-->
+                    
+                    <div class="input-group  col-sm-8">
+                        <h:selectOneMenu class="form-control" id="rolidRol" value="#{userManagedBean.FK_Rol}" title="Rol" required="true" requiredMessage="The RolidRol field is required.">
+                            <!-- TODO: update below reference to list of available items-->
+                           <f:selectItems value="#{userManagedBean.todosR}" var="r" itemLabel="#{r.nombre}" itemValue="#{r.idRol}"/>
+                        </h:selectOneMenu>
+                    </div>
+                    <br/><br/>
+                    
+                   
+                        <h:commandButton class="btn btn-warning" value="Editar"  action="#{userManagedBean.editar()}" /> &nbsp;
+                    <h:button class="btn btn-default" outcome="listUser.jsf" value="Atrás" />
+                    
+                    
+                  
+                
+            </h:form>
+        </f:view>
+
+               </ui:define>
+            </ui:composition>
+                   
+    </h:body>
+</html>
+

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <body>
+	    <ui:composition>       
+                
+      <footer>
+        <div class="row">
+          <div class="col-lg-12">
+              <p>Copyright &copy; Aither Integrations &middot;  <img src="../img/logo_color_blanco.png" height="100"/> </p>
+             
+          </div>
+        </div>
+      </footer>
+       
+       <!-- Ventana Modal -->
+       <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title" id="myModalLabel">Iniciar Sesion</h4>
+                </div>
+                
+               <h:form >
+                  <div class="modal-body">
+                   
+                      <div class="input-group" >
+                        <!-- <span class="input-group-addon">@</span>-->
+                        
+                        <h:inputText  class="form-control" id="nicknameinput"  value="#{loginApi.nickname}" />                                                                                                     
+                        <h:inputSecret  class="form-control"  value="#{loginApi.password}"/>
+                      </div>
+                   
+                    
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <h:commandButton  type="submit" class="btn btn-primary" action="#{loginApi.loginUser()}" value="Iniciar Sesion"></h:commandButton>
+                </div>
+              </h:form>
+                  
+              </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+          </div><!-- /.modal -->
+                
+        <!-- Bootstrap core JavaScript -->
+       <!-- Placed at the end of the document so the pages load faster -->
+       <!-- Make sure to add jQuery - download the most recent version at http://jquery.com/ -->
+
+ 
+	    </ui:composition>
+    </body>
+</html>

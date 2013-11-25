@@ -35,28 +35,16 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Tesoro.findAll", query = "SELECT t FROM Tesoro t"),
     @NamedQuery(name = "Tesoro.findByIdTesoro", query = "SELECT t FROM Tesoro t WHERE t.idTesoro = :idTesoro"),
     @NamedQuery(name = "Tesoro.findByCodigoTesoro", query = "SELECT t FROM Tesoro t WHERE t.codigoTesoro = :codigoTesoro"),
-    @NamedQuery(name = "Tesoro.findByCodigoValidacio", query = "SELECT t FROM Tesoro t WHERE t.codigoValidacio = :codigoValidacio"),
+    @NamedQuery(name = "Tesoro.findByCodigoValidacion", query = "SELECT t FROM Tesoro t WHERE t.codigoValidacion = :codigoValidacion"),
     @NamedQuery(name = "Tesoro.findByCoordenadas", query = "SELECT t FROM Tesoro t WHERE t.coordenadas = :coordenadas"),
     @NamedQuery(name = "Tesoro.findByEstado", query = "SELECT t FROM Tesoro t WHERE t.estado = :estado"),
     @NamedQuery(name = "Tesoro.findByGoogleUrl", query = "SELECT t FROM Tesoro t WHERE t.googleUrl = :googleUrl"),
+    @NamedQuery(name = "Tesoro.findByCodigoPostal", query = "SELECT t FROM Tesoro t WHERE t.codigoPostal = :codigoPostal"),
     @NamedQuery(name = "Tesoro.findByPais", query = "SELECT t FROM Tesoro t WHERE t.pais = :pais"),
-    @NamedQuery(name = "Tesoro.findByMunicipio", query = "SELECT t FROM Tesoro t WHERE t.municipio = :municipio"),
     @NamedQuery(name = "Tesoro.findByLocalidad", query = "SELECT t FROM Tesoro t WHERE t.localidad = :localidad"),
+    @NamedQuery(name = "Tesoro.findByProvincia", query = "SELECT t FROM Tesoro t WHERE t.provincia = :provincia"),
     @NamedQuery(name = "Tesoro.findByBorradoLogico", query = "SELECT t FROM Tesoro t WHERE t.borradoLogico = :borradoLogico")})
 public class Tesoro implements Serializable {
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "CodigoValidacion")
-    private String codigoValidacion;
-    @Size(max = 45)
-    @Column(name = "CodigoPostal")
-    private String codigoPostal;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "Provincia")
-    private String provincia;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -71,8 +59,8 @@ public class Tesoro implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "CodigoValidacio")
-    private String codigoValidacio;
+    @Column(name = "CodigoValidacion")
+    private String codigoValidacion;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
@@ -86,6 +74,9 @@ public class Tesoro implements Serializable {
     @Size(max = 120)
     @Column(name = "GoogleUrl")
     private String googleUrl;
+    @Size(max = 45)
+    @Column(name = "CodigoPostal")
+    private String codigoPostal;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -94,13 +85,13 @@ public class Tesoro implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "Municipio")
-    private String municipio;
+    @Column(name = "Localidad")
+    private String localidad;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "Localidad")
-    private String localidad;
+    @Column(name = "Provincia")
+    private String provincia;
     @Basic(optional = false)
     @NotNull
     @Column(name = "BorradoLogico")
@@ -125,15 +116,15 @@ public class Tesoro implements Serializable {
         this.idTesoro = idTesoro;
     }
 
-    public Tesoro(Integer idTesoro, String codigoTesoro, String codigoValidacio, String coordenadas, String estado, String pais, String municipio, String localidad, boolean borradoLogico) {
+    public Tesoro(Integer idTesoro, String codigoTesoro, String codigoValidacion, String coordenadas, String estado, String pais, String localidad, String provincia, boolean borradoLogico) {
         this.idTesoro = idTesoro;
         this.codigoTesoro = codigoTesoro;
-        this.codigoValidacio = codigoValidacio;
+        this.codigoValidacion = codigoValidacion;
         this.coordenadas = coordenadas;
         this.estado = estado;
         this.pais = pais;
-        this.municipio = municipio;
         this.localidad = localidad;
+        this.provincia = provincia;
         this.borradoLogico = borradoLogico;
     }
 
@@ -153,12 +144,12 @@ public class Tesoro implements Serializable {
         this.codigoTesoro = codigoTesoro;
     }
 
-    public String getCodigoValidacio() {
-        return codigoValidacio;
+    public String getCodigoValidacion() {
+        return codigoValidacion;
     }
 
-    public void setCodigoValidacio(String codigoValidacio) {
-        this.codigoValidacio = codigoValidacio;
+    public void setCodigoValidacion(String codigoValidacion) {
+        this.codigoValidacion = codigoValidacion;
     }
 
     public String getCoordenadas() {
@@ -185,6 +176,14 @@ public class Tesoro implements Serializable {
         this.googleUrl = googleUrl;
     }
 
+    public String getCodigoPostal() {
+        return codigoPostal;
+    }
+
+    public void setCodigoPostal(String codigoPostal) {
+        this.codigoPostal = codigoPostal;
+    }
+
     public String getPais() {
         return pais;
     }
@@ -193,20 +192,20 @@ public class Tesoro implements Serializable {
         this.pais = pais;
     }
 
-    public String getMunicipio() {
-        return municipio;
-    }
-
-    public void setMunicipio(String municipio) {
-        this.municipio = municipio;
-    }
-
     public String getLocalidad() {
         return localidad;
     }
 
     public void setLocalidad(String localidad) {
         this.localidad = localidad;
+    }
+
+    public String getProvincia() {
+        return provincia;
+    }
+
+    public void setProvincia(String provincia) {
+        this.provincia = provincia;
     }
 
     public boolean getBorradoLogico() {
@@ -283,30 +282,6 @@ public class Tesoro implements Serializable {
     @Override
     public String toString() {
         return "entity.Tesoro[ idTesoro=" + idTesoro + " ]";
-    }
-
-    public String getCodigoValidacion() {
-        return codigoValidacion;
-    }
-
-    public void setCodigoValidacion(String codigoValidacion) {
-        this.codigoValidacion = codigoValidacion;
-    }
-
-    public String getCodigoPostal() {
-        return codigoPostal;
-    }
-
-    public void setCodigoPostal(String codigoPostal) {
-        this.codigoPostal = codigoPostal;
-    }
-
-    public String getProvincia() {
-        return provincia;
-    }
-
-    public void setProvincia(String provincia) {
-        this.provincia = provincia;
     }
     
 }
