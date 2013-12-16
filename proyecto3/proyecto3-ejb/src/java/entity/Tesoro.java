@@ -5,9 +5,7 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,16 +15,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author IsmiKin
+ * @author ASUS
  */
 @Entity
 @Table(name = "tesoro")
@@ -36,7 +32,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Tesoro.findByIdTesoro", query = "SELECT t FROM Tesoro t WHERE t.idTesoro = :idTesoro"),
     @NamedQuery(name = "Tesoro.findByCodigoTesoro", query = "SELECT t FROM Tesoro t WHERE t.codigoTesoro = :codigoTesoro"),
     @NamedQuery(name = "Tesoro.findByCodigoValidacion", query = "SELECT t FROM Tesoro t WHERE t.codigoValidacion = :codigoValidacion"),
-    @NamedQuery(name = "Tesoro.findByCoordenadas", query = "SELECT t FROM Tesoro t WHERE t.coordenadas = :coordenadas"),
+    @NamedQuery(name = "Tesoro.findByLatitud", query = "SELECT t FROM Tesoro t WHERE t.latitud = :latitud"),
+    @NamedQuery(name = "Tesoro.findByLongitud", query = "SELECT t FROM Tesoro t WHERE t.longitud = :longitud"),
+    @NamedQuery(name = "Tesoro.findByAltitud", query = "SELECT t FROM Tesoro t WHERE t.altitud = :altitud"),
+    @NamedQuery(name = "Tesoro.findByDireccion", query = "SELECT t FROM Tesoro t WHERE t.direccion = :direccion"),
     @NamedQuery(name = "Tesoro.findByEstado", query = "SELECT t FROM Tesoro t WHERE t.estado = :estado"),
     @NamedQuery(name = "Tesoro.findByGoogleUrl", query = "SELECT t FROM Tesoro t WHERE t.googleUrl = :googleUrl"),
     @NamedQuery(name = "Tesoro.findByCodigoPostal", query = "SELECT t FROM Tesoro t WHERE t.codigoPostal = :codigoPostal"),
@@ -64,8 +63,21 @@ public class Tesoro implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
-    @Column(name = "Coordenadas")
-    private String coordenadas;
+    @Column(name = "Latitud")
+    private String latitud;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
+    @Column(name = "Longitud")
+    private String longitud;
+    @Size(max = 100)
+    @Column(name = "Altitud")
+    private String altitud;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
+    @Column(name = "Direccion")
+    private String direccion;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -96,18 +108,12 @@ public class Tesoro implements Serializable {
     @NotNull
     @Column(name = "BorradoLogico")
     private boolean borradoLogico;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tesoroidTesoro")
-    private Collection<Comentariotesoro> comentariotesoroCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tesoro")
-    private Collection<Busquedatesoros> busquedatesorosCollection;
     @JoinColumn(name = "Usuario_idUsuario", referencedColumnName = "idUsuario")
     @ManyToOne(optional = false)
     private Usuario usuarioidUsuario;
     @JoinColumn(name = "SolicitudTesoro_idSolicitudTesoro", referencedColumnName = "idSolicitudTesoro")
     @ManyToOne(optional = false)
     private Solicitudtesoro solicitudTesoroidSolicitudTesoro;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tesoro")
-    private Collection<Log> logCollection;
 
     public Tesoro() {
     }
@@ -116,11 +122,13 @@ public class Tesoro implements Serializable {
         this.idTesoro = idTesoro;
     }
 
-    public Tesoro(Integer idTesoro, String codigoTesoro, String codigoValidacion, String coordenadas, String estado, String pais, String localidad, String provincia, boolean borradoLogico) {
+    public Tesoro(Integer idTesoro, String codigoTesoro, String codigoValidacion, String latitud, String longitud, String direccion, String estado, String pais, String localidad, String provincia, boolean borradoLogico) {
         this.idTesoro = idTesoro;
         this.codigoTesoro = codigoTesoro;
         this.codigoValidacion = codigoValidacion;
-        this.coordenadas = coordenadas;
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.direccion = direccion;
         this.estado = estado;
         this.pais = pais;
         this.localidad = localidad;
@@ -152,12 +160,36 @@ public class Tesoro implements Serializable {
         this.codigoValidacion = codigoValidacion;
     }
 
-    public String getCoordenadas() {
-        return coordenadas;
+    public String getLatitud() {
+        return latitud;
     }
 
-    public void setCoordenadas(String coordenadas) {
-        this.coordenadas = coordenadas;
+    public void setLatitud(String latitud) {
+        this.latitud = latitud;
+    }
+
+    public String getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(String longitud) {
+        this.longitud = longitud;
+    }
+
+    public String getAltitud() {
+        return altitud;
+    }
+
+    public void setAltitud(String altitud) {
+        this.altitud = altitud;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
     public String getEstado() {
@@ -216,24 +248,6 @@ public class Tesoro implements Serializable {
         this.borradoLogico = borradoLogico;
     }
 
-    @XmlTransient
-    public Collection<Comentariotesoro> getComentariotesoroCollection() {
-        return comentariotesoroCollection;
-    }
-
-    public void setComentariotesoroCollection(Collection<Comentariotesoro> comentariotesoroCollection) {
-        this.comentariotesoroCollection = comentariotesoroCollection;
-    }
-
-    @XmlTransient
-    public Collection<Busquedatesoros> getBusquedatesorosCollection() {
-        return busquedatesorosCollection;
-    }
-
-    public void setBusquedatesorosCollection(Collection<Busquedatesoros> busquedatesorosCollection) {
-        this.busquedatesorosCollection = busquedatesorosCollection;
-    }
-
     public Usuario getUsuarioidUsuario() {
         return usuarioidUsuario;
     }
@@ -248,15 +262,6 @@ public class Tesoro implements Serializable {
 
     public void setSolicitudTesoroidSolicitudTesoro(Solicitudtesoro solicitudTesoroidSolicitudTesoro) {
         this.solicitudTesoroidSolicitudTesoro = solicitudTesoroidSolicitudTesoro;
-    }
-
-    @XmlTransient
-    public Collection<Log> getLogCollection() {
-        return logCollection;
-    }
-
-    public void setLogCollection(Collection<Log> logCollection) {
-        this.logCollection = logCollection;
     }
 
     @Override
