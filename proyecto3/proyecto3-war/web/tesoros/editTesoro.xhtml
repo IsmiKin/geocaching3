@@ -19,8 +19,14 @@
                     <h:inputText id="codigoTesoro" value="#{tesoroBean.tesoroAEditar.codigoTesoro}" title="CodigoTesoro" required="true" requiredMessage="The CodigoTesoro field is required."/>
                     <h:outputLabel value="CodigoValidacion:" for="codigoValidacion" />
                     <h:inputText id="codigoValidacion" value="#{tesoroBean.tesoroAEditar.codigoValidacion}" title="CodigoValidacion" required="true" requiredMessage="The CodigoValidacion field is required."/>
-                    <h:outputLabel value="Coordenadas:" for="coordenadas" />
-                    <h:inputText id="coordenadas" value="#{tesoroBean.tesoroAEditar.coordenadas}" title="Coordenadas" required="true" requiredMessage="The Coordenadas field is required."/>
+                    <h:outputLabel value="Latitud:" for="latitud" />
+                    <h:inputText id="latitud" value="#{tesoroBean.tesoroAEditar.latitud}" title="Latitud" required="true" requiredMessage="The Latitud field is required."/>
+                    <h:outputLabel value="Longitud:" for="longitud" />
+                    <h:inputText id="longitud" value="#{tesoroBean.tesoroAEditar.longitud}" title="Longitud" required="true" requiredMessage="The Longitud field is required."/>
+                    <h:outputLabel value="Altitud:" for="altitud" />
+                    <h:inputText id="altitud" value="#{tesoroBean.tesoroAEditar.altitud}" title="Altitud"/>
+                    <h:outputLabel value="Direccion" for="direccion" />
+                    <h:inputText id="direccion" value="#{tesoroBean.tesoroAEditar.direccion}" title="Direccion"/>
                     <h:outputLabel value="Estado:" for="estado" />
                     <h:selectOneMenu class="form-control" style="height:100;" value="#{tesoroBean.tesoroAEditar.estado}">
                                                     <f:selectItem itemLabel="ACTIVO" itemValue="ACTIVO" />

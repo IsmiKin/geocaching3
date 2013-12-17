@@ -4,13 +4,13 @@
  */
 package dao;
 
+import entity.Tesoro;
+import entity.Usuario;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import entity.Tesoro;
-import entity.Usuario;
 
 /**
  *
@@ -29,7 +29,6 @@ public class TesoroFacade extends AbstractFacade<Tesoro> {
     public TesoroFacade() {
         super(Tesoro.class);
     }
-    
     public List<Tesoro> getAllTesoros()
     {
         List<Tesoro> listaTesoro = null;
@@ -123,6 +122,5 @@ public class TesoroFacade extends AbstractFacade<Tesoro> {
         
         return lista;
     }
-    
     
 }
